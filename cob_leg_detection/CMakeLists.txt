@@ -8,6 +8,8 @@ set(catkin_RUN_PACKAGES
 	geometry_msgs
 	image_geometry
 	laser_geometry
+    leg_detector
+    people_tracking_filter
 	roscpp
 	rospy
 	sensor_msgs
@@ -30,8 +32,9 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(OpenCV REQUIRED)	
 find_package(orocos_kdl REQUIRED)
 find_package(Eigen REQUIRED)
-find_package(PkgConfig)
-pkg_check_modules(BFL REQUIRED bfl)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(BFL REQUIRED bfl) #orocos-bfl
+pkg_check_modules(BULLET bullet)
 
 ## dynamic reconfigure config
 generate_dynamic_reconfigure_options(
@@ -39,6 +42,11 @@ generate_dynamic_reconfigure_options(
 )
 
 catkin_package()
+
+## dynamic reconfigure config
+generate_dynamic_reconfigure_options(
+  cfg/DualTracker.cfg
+)
 
 ## Specify additional locations of header files
 include_directories(
@@ -48,20 +56,40 @@ include_directories(
   ${orocos_kdl_INCLUDE_DIRS}
   ${BFL_INCLUDE_DIRS}
   ${EIGEN_INCLUDE_DIRS}
+  ${BULLET_INCLUDE_DIRS}
 )
 
 link_directories(${BFL_LIBRARY_DIRS})
 
 add_definitions(${EIGEN_DEFINITIONS})
 
+add_library(dual_people_leg_tracker
+            src/advanced_tracker_particle.cpp
+            src/people_particle_filter.cpp
+            src/models/occlusion_model.cpp
+            src/models/advanced_measmodel_pos.cpp
+            src/models/advanced_sysmodel_pos_vel.cpp
+            src/distributions/multivariate_gaussian_pos_vel.cpp
+            src/distributions/gaussian_pos_vel_mod.cpp
+            src/leg_feature.cpp
+            src/people_tracker.cpp
+            src/kalman/kalman_filter.cpp
+            src/association/association.cpp
+            )
+
 ## Declare a cpp executable
 add_executable(leg_detection               
                src/laser_processor.cpp
                src/leg_detector.cpp 
                src/calc_leg_features.cpp)
+
+add_executable(dual_tracker
+                  src/dual_tracker.cpp 
+               )
                
 ## Add cmake target dependencies of the executable/library
 add_dependencies(leg_detection ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(dual_tracker ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 
 ## Specify libraries to link a library or executable target against
@@ -71,6 +99,8 @@ target_link_libraries(leg_detection
    ${orocos_kdl_LIBRARIES}
    ${BFL_LIBRARIES}
 )
+target_link_libraries(dual_tracker dual_people_leg_tracker ${catkin_LIBRARIES} ${BFL_LIBRARIES} ${BULLET_LIBRARIES} ${OpenMP_CXX_LIBRARIES} hungarian)
+
 
 #############
 ## Install ##
