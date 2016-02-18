@@ -8,7 +8,7 @@
 #ifndef PEOPLE_DUAL_PEOPLE_LEG_TRACKER_SRC_ASSOCIATION_ASSOCIATION_H_
 #define PEOPLE_DUAL_PEOPLE_LEG_TRACKER_SRC_ASSOCIATION_ASSOCIATION_H_
 
-#include <dual_people_leg_tracker/leg_feature.h>
+#include <cob_leg_detection/leg_feature.h>
 
 class Association {
 

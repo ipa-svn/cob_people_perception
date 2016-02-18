@@ -8,7 +8,6 @@ set(catkin_RUN_PACKAGES
 	geometry_msgs
 	image_geometry
 	laser_geometry
-    leg_detector
     people_tracking_filter
 	roscpp
 	rospy
@@ -39,14 +38,10 @@ pkg_check_modules(BULLET bullet)
 ## dynamic reconfigure config
 generate_dynamic_reconfigure_options(
   cfg/LegDetection.cfg
+  cfg/DualTracker.cfg
 )
 
 catkin_package()
-
-## dynamic reconfigure config
-generate_dynamic_reconfigure_options(
-  cfg/DualTracker.cfg
-)
 
 ## Specify additional locations of header files
 include_directories(
@@ -62,6 +57,10 @@ include_directories(
 link_directories(${BFL_LIBRARY_DIRS})
 
 add_definitions(${EIGEN_DEFINITIONS})
+
+add_library(hungarian
+              include/cob_leg_detection/libhungarian/hungarian.c
+            )
 
 add_library(dual_people_leg_tracker
             src/advanced_tracker_particle.cpp

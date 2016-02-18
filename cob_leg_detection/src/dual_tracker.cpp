@@ -37,27 +37,27 @@
 #include <algorithm>
 
 // Leg Detector includes
-#include <leg_detector/laser_processor.h>
-#include <leg_detector/calc_leg_features.h>
+#include <cob_leg_detection/laser_processor.h>
+#include <cob_leg_detection/calc_leg_features.h>
 
 // Own includes
-#include <dual_people_leg_tracker/DualTrackerConfig.h>
-#include <dual_people_leg_tracker/dual_tracker.h>
-#include <dual_people_leg_tracker/detection/detection.h>
-#include <dual_people_leg_tracker/math/math_functions.h>
-#include <dual_people_leg_tracker/jpda/murty.h>
-#include <dual_people_leg_tracker/jpda/jpda.h>
-#include <dual_people_leg_tracker/config_struct.h>
-#include <dual_people_leg_tracker/benchmarking/timer.h>
-#include <dual_people_leg_tracker/leg_feature.h>
-#include <dual_people_leg_tracker/people_tracker.h>
-#include <dual_people_leg_tracker/models/occlusion_model.h>
-#include <dual_people_leg_tracker/association/association.h>
+#include <cob_leg_detection/DualTrackerConfig.h>
+#include <cob_leg_detection/dual_tracker.h>
+#include <cob_leg_detection/detection/detection.h>
+#include <cob_leg_detection/math/math_functions.h>
+#include <cob_leg_detection/jpda/murty.h>
+#include <cob_leg_detection/jpda/jpda.h>
+#include <cob_leg_detection/config_struct.h>
+#include <cob_leg_detection/benchmarking/timer.h>
+#include <cob_leg_detection/leg_feature.h>
+#include <cob_leg_detection/people_tracker.h>
+#include <cob_leg_detection/models/occlusion_model.h>
+#include <cob_leg_detection/association/association.h>
 
-#include <dual_people_leg_tracker/visualization/color_functions.h>
-#include <dual_people_leg_tracker/visualization/color_definitions.h>
-#include <dual_people_leg_tracker/visualization/visualization_conversions.h>
-#include <dual_people_leg_tracker/visualization/matrix_cout_helper.h>
+#include <cob_leg_detection/visualization/color_functions.h>
+#include <cob_leg_detection/visualization/color_definitions.h>
+#include <cob_leg_detection/visualization/visualization_conversions.h>
+#include <cob_leg_detection/visualization/matrix_cout_helper.h>
 
 // OpenCV includes
 #include <opencv/cxcore.h>
@@ -259,7 +259,7 @@ public:
 
 
 
-  dynamic_reconfigure::Server<dual_people_leg_tracker::DualTrackerConfig> server_; /**< The configuration server*/
+  dynamic_reconfigure::Server<cob_leg_detection::DualTrackerConfig> server_; /**< The configuration server*/
 
   message_filters::Subscriber<people_msgs::PositionMeasurement> people_sub_;
   message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub_;
@@ -329,7 +329,7 @@ public:
     laser_notifier_.setTolerance(ros::Duration(0.01));
 
     // Configuration server
-    dynamic_reconfigure::Server<dual_people_leg_tracker::DualTrackerConfig>::CallbackType f;
+    dynamic_reconfigure::Server<cob_leg_detection::DualTrackerConfig>::CallbackType f;
     f = boost::bind(&DualTracker::configure, this, _1, _2);
     server_.setCallback(f);
 
@@ -347,7 +347,7 @@ public:
    *  @brief Handles the configuration of this node
    */
 
-  void configure(dual_people_leg_tracker::DualTrackerConfig &config, uint32_t level)
+  void configure(cob_leg_detection::DualTrackerConfig &config, uint32_t level)
   {
     // Clustering parameters
     connected_thresh_           = config.connection_threshold;

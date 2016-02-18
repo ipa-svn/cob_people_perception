@@ -9,7 +9,7 @@
 #include <Eigen/Dense>
 
 // Hungarian Solver
-#include <libs/libhungarian/hungarian.h>
+#include <cob_leg_detection/libhungarian/hungarian.h>
 
 //#define PSEUDO_INF
 #define INF 100000

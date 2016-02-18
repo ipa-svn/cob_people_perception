@@ -36,8 +36,8 @@
 
 #include <ros/console.h>
 
-#include <dual_people_leg_tracker/models/advanced_sysmodel_pos_vel.h>
-#include <dual_people_leg_tracker/benchmarking/timer.h>
+#include <cob_leg_detection/models/advanced_sysmodel_pos_vel.h>
+#include <cob_leg_detection/benchmarking/timer.h>
 
 using namespace std;
 using namespace BFL;

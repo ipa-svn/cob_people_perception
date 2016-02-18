@@ -1,5 +1,5 @@
-#include <dual_people_leg_tracker/models/occlusion_model.h>
-#include <leg_detector/constants.h>
+#include <cob_leg_detection/models/occlusion_model.h>
+#include <cob_leg_detection/constants.h>
 #include <cmath>
 
 OcclusionModel::OcclusionModel( tf::TransformListener& tfl)

@@ -43,7 +43,7 @@
 #include <people_tracking_filter/gaussian_vector.h>
 
 // Own includes
-#include <dual_people_leg_tracker/eigenmvn/eigenmvn.h>
+#include <cob_leg_detection/eigenmvn/eigenmvn.h>
 
 #define DEBUG_MULTIVARIATEGAUSSIANPOSVEL 1
 

@@ -90,10 +90,30 @@ namespace laser_processor
   //! An ordered set of Samples
   class SampleSet : public std::set<Sample*, CompareSample>
   {
-  public:
-    SampleSet() {}
+public:
+  int id_; /** < Id of the SampleSet */
+
+  std::string label; /**< A given label */
+
+  double probability_; /**< The probability in being a leg */
+
+public:
+  SampleSet():
+    probability_(0.0),
+    id_(0)
+    {
+
+    }
 
     ~SampleSet() { clear(); }
+
+  void setProbability(double probability){
+    probability_ = probability;
+  }
+
+  double getProbability(){
+    return probability_;
+  }
 
     void clear();
 
