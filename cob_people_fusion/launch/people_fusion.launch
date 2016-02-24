@@ -7,6 +7,11 @@
   <!-- <node pkg="topic_tools" type="relay" name="laser_relay" args="/people_detections/laser_detections /people_detections/all_detections" /> -->
   <!-- <node pkg="topic_tools" type="relay" name="face_relay" args="/people_detections/face_detections /people_detections/all_detections" /> -->
   <!-- <node pkg="topic_tools" type="relay" name="body_relay" args="/people_detections/body_detections /people_detections/all_detections" /> -->
+
+  <!-- relay face detections, ifx until a real solution is implemented -->
+  <node pkg="topic_tools" type="relay" name="relay_sensorring" args="/people_detection_sensorring/detection_tracker/face_position_array /people_detection/detection_tracker/face_position_array" />
+  <node pkg="topic_tools" type="relay" name="relay_left" args="/people_detection_torso_left/detection_tracker/face_position_array /people_detection/detection_tracker/face_position_array" />
+  <node pkg="topic_tools" type="relay" name="relay_right" args="/people_detection_torso_right/detection_tracker/face_position_array /people_detection/detection_tracker/face_position_array" />
   
 
   <!-- people fusion node -->

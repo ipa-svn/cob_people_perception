@@ -1,18 +1,18 @@
 detector_nodes:
 # Keep in mind to tab-align the values!!!!
 # The name of the detector MUST be the same as the field inside the DetectionArray message!
+  #- 
+   # name:           "body"
+    #weight:         1
+    #min_detections: 1
+    #min_frequency:  2
+    #topic:          "/people_detections/body_detections"
   - 
-    name:           "body"
-    weight:         1
-    min_detections: 1
-    min_frequency:  2
-    topic:          "/people_detections/body_detections"
-  - 
-    name:           "face"
+    name:           "head"
     min_detections: 1
     weight:         1
     min_frequency:  2
-    topic:          "/people_detections/face_detections"
+    topic:          "/people_detection/detection_tracker/face_position_array"
   - 
     name:           "laser"
     min_detections: 1
